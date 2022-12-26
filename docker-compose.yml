@@ -47,7 +47,8 @@ services:
     volumes:
       - ./webapi:/webapi
       - ./.m2:/root/.m2
-    command: [ "mvn", "spring-boot:run", "-Dmaven.test.skip=true" ]
+    # command: mvn spring-boot:run -Dmaven.test.skip=true
+    command: mvn spring-boot:run -Dmaven.test.skip=true -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
     restart: always
 
   webapp:
