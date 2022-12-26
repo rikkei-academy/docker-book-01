@@ -8,7 +8,7 @@ services:
       - MYSQL_DATABASE=rabook
       - MYSQL_ROOT_PASSWORD=secret
     volumes:
-      - db:/var/lib/mysql
+      - ./db:/var/lib/mysql
     ports:
       - "3307:3306"
     restart: always
@@ -28,7 +28,7 @@ services:
   #     - MYSQL_DATABASE=rabook
   #     - MYSQL_PORT=3306
   #   restart: always
-  
+
   webapi:
     build:
       context: ./webapi
@@ -46,20 +46,19 @@ services:
       - MYSQL_PORT=3306
     volumes:
       - ./webapi:/webapi
-    command: ["mvn", "spring-boot:run", "-Dmaven.test.skip=true"]
+      - ./.m2:/root/.m2
+    command: [ "mvn", "spring-boot:run", "-Dmaven.test.skip=true" ]
     restart: always
 
   webapp:
     build:
       context: ./webapp
       dockerfile: Dockerfile
-    env_file: ./.env
     volumes:
       - './webapp:/app'
       - '/app/node_modules'
     ports:
       - 80:4200
 
-      
-volumes:
-  db:
+# volumes:
+#   db:
