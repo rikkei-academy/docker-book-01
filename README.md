@@ -2,6 +2,6 @@
 
 Before start, clone webapi and webapp to this project by commands
 
-git clone <angular_git_url> webapp
+> git clone <angular_git_url> webapp
 
-git clone <spring_git_url> webapi
+> git clone <spring_git_url> webapi
